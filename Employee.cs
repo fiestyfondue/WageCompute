@@ -6,33 +6,38 @@ namespace EmployeeWage
 {
     class Employee
     {
-        public const int  IS_FULL_TIME = 1;
+        public const int IS_FULL_TIME = 2;
         public const int EMP_RATE_PER_HOUR = 20;
-        public const int FULL_DAY_HOUR = 8;
-        public const int IS_PART_TIME = 2;
-        int Emphrs = 0;
-        int Wage = 0;
+        public const int IS_PART_TIME = 1;
+        public const int NUM_OF_WORKING_DAYS = 30;  //Assuming no sundays off
 
 
-        public void Attendance()
+        public void EmpWage()
         {
-            Random random = new Random();
-            int Attendance = random.Next(0, 3);
-            switch (Attendance)
+            int EmpHrs = 0, Wage = 0, TotalEmpWage = 0;
+
+            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
             {
-                case IS_PART_TIME:
-                    Emphrs = 4;
-                    break;
-                case IS_FULL_TIME:
-                    Emphrs = 8;
-                    break;
-                default:
-                    Emphrs = 0;
-                    break;
+                Random random = new Random();
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
+                {
+                    case IS_PART_TIME:
+                        EmpHrs = 4;
+                        break;
+                    case IS_FULL_TIME:
+                        EmpHrs = 8;
+                        break;
+                    default:
+                        EmpHrs = 0;
+                        break;
+                }
+                Wage = EmpHrs * EMP_RATE_PER_HOUR;
+                TotalEmpWage += Wage;
+                Console.WriteLine("Wage: " + Wage);
+                Console.ReadLine();
             }
-            Wage = Emphrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("Wage: " + Wage);
-            Console.ReadLine();
+            Console.WriteLine("Total Emp Wage : " + TotalEmpWage);
         }
     }
 }
